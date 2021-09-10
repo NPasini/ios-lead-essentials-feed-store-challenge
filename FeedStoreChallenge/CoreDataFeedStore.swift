@@ -60,9 +60,13 @@ public final class CoreDataFeedStore: FeedStore {
 
 	public func deleteCachedFeed(completion: @escaping DeletionCompletion) {
 		perform { context in
-			if let managedCache = try? ManagedCache.newUniqueInstance(in: context) {
+			do {
+				let managedCache = try ManagedCache.newUniqueInstance(in: context)
 				context.delete(managedCache)
+				try context.save()
 				completion(nil)
+			} catch {
+				completion(error)
 			}
 		}
 	}
