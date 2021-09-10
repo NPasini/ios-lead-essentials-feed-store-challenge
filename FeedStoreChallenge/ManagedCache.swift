@@ -9,7 +9,7 @@
 import CoreData
 
 @objc(ManagedCache)
-class ManagedCache: NSManagedObject {
+final class ManagedCache: NSManagedObject {
 	@NSManaged internal var timestamp: Date
 	@NSManaged internal var feed: NSOrderedSet
 }
